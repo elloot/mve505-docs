@@ -1,0 +1,184 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage[swedish]{babel}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{5pt}
+
+\newtheorem{theorem}{Sats}
+
+\title{Homework 1}
+\author{Elliot Duchek}
+\date{April 2023}
+
+\begin{document}
+
+\maketitle
+
+\section{Fråga 1}
+I samarbete med Ludwig Lewis och Erik Dahllöf
+
+\textbf{a)}
+Låt $L_k=$ \# möjliga lösenord av längd k. Det finns 65 tecken att välja bland, och det är tillåtet att använda samma flera gånger (alltså återläggning tillåten). Därför är det totala antalet möjliga lösenord av längd 10
+\[
+	L_{10}=65^{10}
+.\] 
+
+\textbf{b)}
+Varje tecken i IamKALLE!! förekommer exakt en gång, utom L och ! som förekommer två gånger vardera. Att räkna antalet möjliga permutationer av IamKALLE!! och exkludera dubbletter är ekvivalent med att hitta koefficienten framför termen $I^1a^1m^1K^1A^1L^2E^1!^2$ i utvecklingen av $(I+a+m+K+A+L+E+!)^{10}$. Multinomialsatsen ger att denna koefficient är $\frac{10!}{2!2!} = \frac{10!}{4}$.
+
+\textbf{c)}
+A: Låt $L_A$ vara antalet möjliga lösenord med tre versaler och två siffror. $L_A = {10 \choose 3} \cdot 26^{3} \cdot {7 \choose 2} \cdot 10^{2} \cdot 29^{5}$ ty vi måste först välja på vilka 3 platser vi ska placera våra versaler, sedan välja 3 versaler, placera ut våra två siffror bland de 7 återstående platserna och sedan välja 5 av de återstående 29 tecknen (gemener och specialtecken) med återläggning tillåtet. Vi multiplicerar ihop antalet sätt varje operation kan göras på enligt multiplikationsprincipen. Sannolikheten att ett slumpat lösenord uppfyller kraven ges då av
+\[
+	\mathbb{P}(A) = \frac{L_A}{65^{10}} = \frac{{10 \choose 3} \cdot 26^{3} \cdot {7 \choose 2} \cdot 10^{2} \cdot 29^{5}}{65^{10}}
+\] 
+
+B: Låt $L_B$ vara antalet möjliga lösenord som innehåller lika många siffror som specialtecken. $L_B$ ges då av
+ \[
+	 L_B = \sum\limits_{k=1}^{5} {10 \choose k} \cdot {10-k \choose k} \cdot \left( 10 \cdot 3 \right)^{k} \cdot 52^{10-2k} 
+.\] 
+ty vi börjar med att välja var vi ska placera ut $k$ st siffror bland $10$ möjliga platser i lösenordet, och sedan $k$ st specialtecken bland de återstående $10-k$ platserna. Sedan väljer vi vilka siffror och specialtecken vi ska ha med, samt vilka av de återstående $52$ tecknen (versaler och gemener) vi ska ha med i lösenordet. Eftersom vi kan välja att ha antingen 1, 2, 3, 4 eller 5 siffror och specialtecken med i lösenordet för att ha lika många av varje adderar vi de olika möjligheterna enligt additionsprincipen (de är uppenbart disjunkta). Sannolikheten att ett slumpat lösenord uppfyller kraven är alltså
+\[
+	\mathbb{P}(B) = \frac{L_B}{65^{10}} = \frac{\sum\limits_{k=1}^{5} {10 \choose k} \cdot {10-k \choose k} \cdot \left( 10 \cdot 3 \right)^{k} \cdot 52^{10-2k}}{65^{10}}
+.\] 
+
+\textbf{d)}
+Låt $L$ vara antalet lösenord med minst en siffra, minst en versal och minst ett specialtecken. För att beräkna $L$ börjar vi med att välja en siffra, en versal och ett specialtecken, så att vi garanterat har åtminstone en av varje. Sedan väljer vi på vilka 3 platser vi ska placera ut dessa på, bland 10. Efter det fyller vi på med de återstående 7 tecknen, som vi kan välja hur vi vill. Eftersom vi ska placera ut de sista 7 tecknen på 7 platser finns det bara ett sätt att göra detta på. Alltså är
+ \[
+	 L = 10 \cdot 26 \cdot 3 \cdot {10 \choose 3} \cdot 65^{7}
+.\] 
+
+\textbf{e)}
+Det enda som spelar roll är hur många gånger vi väljer varje tecken. Vi kan därför använda oss av ''dots and dashes''-tänket, alltså vi placerar ut 64 pinnar som avgränsar på vilka av våra 65 tecken 10 bollar hamnar. Utrymmet mellan varje pinne representerar ett av våra tecken, och hamnar en boll mellan två pinnar har vi valt ett av det tecknet. Vi kan placera ut bollarna/pinnarna på ${64 + 10 \choose 10} = {74 \choose 10}$ olika sätt, alltså finns det så många lösenord som inte är permutationer av andra lösenord.
+
+
+\section{Fråga 2}
+I samarbete med Ludwig Lewis och Erik Dahllöf.
+
+\textbf{a)}
+Eftersom vi vet att Ronnie måste göra en ''complete clearance'' vet vi att han inte kan missa någon gång. På grund av detta och att de 6 icke-röda bollarna måste sänkas i stigande ordning i slutet är det enda som skiljer Ronnies breaks från varandra vilka bollar han skjuter efter varje röd. Det skiljer $147 - 142 = 5$ poäng mellan Ronnies break och en maximal break. Vi kan därför tänka oss att vi delar ut 5 minuspoäng bland Ronnies 15 första skott (de där han sänker en röd följt av en annan färg. Delar vi exempelvis ut ett minuspoäng till Ronnies första skott är det ekvivalent med att Ronnie sänker en röd och sen en rosa, istället för en röd och sen en svart. Eftersom de icke-röda bollarna har ett värde som är minst 2 poäng, kommer vi inte stöta på problem att vi delar ut för många minuspoäng till något skott, eftersom vi varje gång kommer få minst $1 + \left( 7 - 5 \right) $ poäng av varje skott (det är alltså inte möjligt att vi råkar räkna med något skott där Ronnie missar).
+
+Att fördela 5 minuspoäng på 15 skott är ekvivalent med att placera 5 bollar mellan 14 pinnar (utrymmet mellan varje pinne utgör ett skott -- vi räknar även med det ''tomma'' utrymmet till vänster och höger om de yttersta pinnarna och får därför 15 skott -- och varje boll utgör ett minuspoäng). Att placera ut bollarna bland pinnarna kan göras på ${14 + 5 \choose 5} = {19 \choose 5}$ sätt (dots and dashes). Alltså är det på så många sätt Ronnie the Rocket kan få sin break om 142 poäng.
+
+\textbf{b)}
+Av att sänka de första 15 röda (varje skott följt av ett till då man sänker en icke-röd) ger maximalt $15\cdot\left( 1 + 7 \right) = 120$ poäng. Ronnie kan alltså inte missa någon gång under delen av spelet då han ska sänka de röda bollarna om han vill ha en break på 138 poäng. När han ska sänka de sista 6 bollarna måste han träffa de 5 första, eftersom $120 + \left( 2 + 3 + 4 + 5 \right) = 134 < 138 $. Han kan dock missa den sista bollen eftersom han då skulle ha $134 + 6 = 140 > 138$ poäng, vilket ger oss möjlighet att dela ut minuspoäng på hans tidigare skott. Vi får alltså två fall.
+
+\textbf{Fall 1, Ronnie träffar det sista skottet}.
+Skulle Ronnie ha sänkt svarta bollar efter varje tidigare röd boll hade han haft en maximum break om 147 poäng, och vi måste alltså dela ut minuspoäng på hans tidigare skott. Det skiljer 9 poäng mellan totalen Ronnie är ute efter och en maximum break, så vi ska dela ut 9 minuspoäng. Observera dock att vi inte får dela ut fler än 5 minuspoäng på varje ''skott'' (alltså då Ronnie sänker en röd och sen en annan färg), eftersom han då skulle ha missat en av de icke-röda bollarna han måste sänka. Vi börjar med att dela ut minuspoängen utan hänsyn till detta, och tar sedan bort fallen då det sker. Om $M_1$ är antalet sätt att dela ut minuspoäng i fall 1 fås
+\[
+	M_1 = {14 + 9 \choose 9} - 15 \cdot {14 + 3 \choose 3} = {23 \choose 9} - 15 \cdot {17 \choose 3}
+.\] 
+Den sista termen $15 \cdot {17 \choose 3}$ kompenserar för de fall där vi delat ut för många minuspoäng. Vi fixerar ett ''skott'' och ger det 6 minuspoäng, för att garantera att vi delat ut för många. Detta kan göras på 15 olika sätt, ett för varje skott. Sedan delar vi ut återstående 3 minuspoäng valfritt bland de 15 skotten.
+
+\textbf{Fall 2, Ronnie missar det sista skottet}.
+Om Ronnie missar det sista skottet har han totalt $147 - 7 = 140$ poäng, vilket är två för många. Här kan vi inte råka dela ut för många minuspoäng, så vi låter $M_2$ vara antalet sätt att dela ut minuspoäng i fall 2 och delar ut 2 minuspoäng bland Ronnies första 15 skott,
+\[
+	M_2 = {14 + 2 \choose 2} = {16 \choose 2}
+.\] 
+
+Slutligen adderar vi ihop dessa fall enligt additionsprincipen då de är disjunkta, och får det totala antalet sätt Ronnie kan få 138 poäng på.
+\[
+	M_{tot} = M_1+M_2 = {23 \choose 9} - 15 \cdot {17 \choose 3} + {16 \choose 2}
+.\] 
+
+\section{Fråga 3}
+I samarbete med Ludwig Lewis och Erik Dahllöf.
+
+\begin{theorem}
+	Oavsett hur siffrorna 1, 2, \ldots, 10 placeras på en cirkel måste åtminstone en triplett av intilligande siffror summera till ett tal större än eller lika med 17.
+\end{theorem}
+
+\begin{proof}
+Det ligger $10$ tal på cirkeln, varje tal ligger i mitten av exakt en triplett, alltså finns det totalt $10$ tripletter på cirkeln. Betrakta summan som tripletterna bildar. Eftersom varje tal omsluts av $3$ tripletter räknas varje tal in i $3$ tripletters enskilda summor. Den totala summan av alla triplettsummor blir alltså
+ \[
+S = 3 \cdot 10 + 3 \cdot 9 + \ldots + 3 \cdot 1 = 165
+\] 
+eftersom varje siffra räknas $3$ gånger totalt. Ser vi varje triplett som en låda innehållande kulor och antalet kulor i lådan som den triplettens summa, kan vi försöka dela ut $165$ kulor bland $10$ lådor. Börjar vi med att dela ut kulorna så att varje låda innehåller $16$ kulor, återstår  $165 - 10 \cdot 16 = 5$ kulor att dela ut. Detta innebär att åtminstone en låda måste innehålla fler än $16$ kulor. Alltså måste åtminstone en triplett ha en summa som överskrider $16$.
+\end{proof}
+
+\section{Fråga 4}
+I samarbete med Rohan Jamieson
+
+\begin{theorem}
+	Låt $\alpha$ vara ett positivt, irrationellt tal och $n$ ett positivt heltal. Då gäller att, bland de reella talen $\alpha, \, 2\alpha, \ldots, \, n\alpha $, ligger åtminstone ett av de på ett avstånd mindre än $\frac{1}{n}$ från ett heltal.
+\end{theorem}
+\begin{proof}
+	Observera att ett tal $x$ ligger på avstånd mindre än $\frac{1}{n}$ från ett heltal om dess decimalutveckling är antingen mindre än $\frac{1}{n}$, eller större än $1 - \frac{1}{n}$.
+	
+	Låt $\delta : \mathbb{R} \rightarrow [0,1)$ vara en funktion som avbildar reella tal på sina decimalutvecklingar. Alltså, $\delta\left( x \right) = x - \left\lfloor x \right\rfloor$. Låt $m,\, k\, \in \mathbb{N}$ s.a. $1 \leq m < k \leq n$. Om $\lvert\delta(k\alpha) - \delta(m\alpha)\rvert < \frac{1}{n}$, måste $\delta\left( k\alpha - m\alpha \right) = \delta\left( \left( k-m \right)\alpha \right)$ vara antingen mindre än $\frac{1}{n}$ (om $\delta(k\alpha) \geq \delta(m\alpha)$), eller större än $1-\frac{1}{n}$ (om $\delta(k\alpha) < \delta(m\alpha)$). Alltså måste talet $\left( k-m \right) \alpha $ ligga på ett avstånd mindre än $\frac{1}{n}$ från ett heltal. Eftersom $1 \leq m < k \leq n$ måste $\left( k-m \right) \in [1, n]$, alltså är $(k-m)\alpha$ ett av talen $\alpha, \, 2\alpha, \ldots, \, n\alpha$. Det som återstår att visa är att minst två av dessa tal måste ha decimalutvecklingar som ligger på avstånd mindre än $\frac{1}{n}$ från varandra.
+
+	Partitionera intervallet $[0, 1)$ som $[0, \frac{1}{n}) \cup [\frac{1}{n}, \frac{2}{n}) \cup \ldots \cup [\frac{n-1}{n}, 1)$. Eftersom $\delta(x) \in [0, 1) \, \forall \, x \in \mathbb{R}$ måste $\delta(l\alpha)$ ligga i något av dessa $n$ delintervall, $l = 1, \, 2,\ldots, n$. Om $\delta(l\alpha)$ ligger i det första delintervallet ligger talet på ett avstånd mindre än $\frac{1}{n}$ från $l$. Ligger $\delta(l\alpha)$ istället i det sista intervallet ligger det på ett avstånd mindre än $\frac{1}{n}$ från $l + 1$. Fallen då $\delta(l\alpha)$ ligger i något av dessa intervall är alltså triviala. Om detta inte är fallet, måste $\delta(l\alpha)$ ligga i något av de $(n-2)$ andra intervallen. Eftersom vi har $n$ st tal $\alpha, \, 2\alpha, \ldots, \, n\alpha$ måste åtminstone 2 tal $\delta(l\alpha)$ och $\delta(p\alpha)$ hamna i samma intervall enligt lådprincipen, $p = 1, \, 2, \ldots, \, n$. Enligt ovan innebär detta att vi har åtminstone ett tal $\lvert l-p \rvert \alpha$ som ligger på avstånd mindre än $\frac{1}{n}$ från ett heltal.
+\end{proof}
+
+\section{Fråga 5}
+$a_n = 5a_{n-1}-3a_{n-2}-9a_{n-3}, \, n \geq 3$ och $a_0 = 0, \, a_1 = a_2 = 1$ 
+
+\textbf{Karakteristiska ekvationen}
+
+Ansätt $a_n = \alpha^n$. Detta ger
+\[
+	\alpha^n = 5\alpha^{n-1}-3\alpha^{n-2}-9\alpha^{n-3}
+.\] 
+Dividerar vi med $\alpha^{n-3}$ i båda led fås
+ \[
+\alpha^3-5\alpha^2+3\alpha+9 = 0
+.\]
+Undersökning visar att $\alpha_1=-1$ är en rot till ekvation, alltså är $\alpha + 1$ en faktor i polynomet i vänsterledet. Polynomdivision ger
+\begin{equation}
+\begin{aligned}
+	(\alpha+1)\left( \alpha^2-6\alpha+9 \right) &= 0\\
+	(\alpha+1)(\alpha-3)^2 &= 0
+\end{aligned} 
+\end{equation}
+Alltså är $\alpha_2 = \alpha_3 = 3$. Vi har då att
+ \[
+a_n = c_1(-1)^{n}+c_2 3^{n} + c_3 n 3^{n}
+\] 
+för $c_1, \, c_2, \, c_3 \in \mathbb{R}$.
+Använd begynnelsevillkoren för att hitta dessa.
+\begin{equation}
+\begin{cases}
+	a_0=0=c_1+c_2\\
+	a_1=1=-c_1+3c_2+3c_3\\
+	a_2=1=c_1+9c_2+18c_3
+\end{cases}	
+\end{equation}
+Gausselimination ger att $c_1=-\frac{5}{16}, \, c_2 = \frac{5}{16}, \, c_3 = -\frac{1}{12}$.
+\[
+\therefore a_n = (-1)^{n+1}\frac{5}{16} + \frac{5}{16}3^{n}-\frac{n 3^{n}}{12}
+.\] 
+
+\textbf{Genererande funktion}
+
+Låt $G(x) = \sum\limits_{n=0}^\infty a_n x^{n} = \sum\limits_{n=3}^\infty a_n x^{n} + a_0 + a_1 x + a_2 x^2, \, \lvert x \rvert < 1$. Då fås
+\begin{equation}
+\begin{aligned}
+	xG(x) &= \sum\limits_{n=0}^\infty a_n x^{n+1} = \sum\limits_{n=3}^\infty a_{n-1} x^n + a_0 x + a_1 x^2\\
+	x^2G(x) &= \sum\limits_{n=3}^\infty a_{n-2} x^n + a_0 x^2\\
+	x^3G(x) &= \sum\limits_{n=3}^\infty a_{n-3} x^n
+\end{aligned}	
+\end{equation}
+Det gäller alltså att
+\begin{equation}
+	\begin{aligned}
+		(1 - 5x + 3 x^2 + 9x^3)G(x) = &\sum\limits_{n=3}^\infty \overbrace{(a_n - 5a_{n-1} + 3a_{n-2} + 9a_{n-3})}^\text{=0} x^{n} + \\ &+ (a_2-5a_1+3a_0)x^2+(a_1-5a_0)x+a_0 =\\&= -4x^2+x
+	\end{aligned}
+\end{equation}
+
+\begin{equation}
+	\begin{aligned}
+	G(x) &= \frac{9\left( x-4x^2 \right) }{(x+1)(9x-3)^2} = \{\text{partialbråksuppdelning}\} =\\ &= \frac{19}{48(1-3x)} - \frac{1}{12(1-3x)^2} - \frac{5}{16(1+x)} = \{\text{utökade binomialsatsen}\}\\&=\sum\limits_{n=0}^{\infty} \frac{19}{48} (3x)^{n} - \sum\limits_{n=0}^\infty \frac{1}{12} {n+1 \choose n} (3x)^{n} - \sum\limits_{n=0}^\infty \frac{5}{16} (-x)^n =\\&= \sum\limits_{n=0}^\infty \left(\frac{19}{48} 3^{n} - \frac{1}{12} (n+1) 3^{n} - \frac{5}{16} (-1)^{n}\right)x^{n} =\\&= \sum\limits_{n=0}^\infty \left( (-1)^{n+1}\frac{5}{16} + \frac{5}{16}3^{n} - \frac{n 3^{n}}{12} \right)x^{n}
+	\end{aligned}
+\end{equation}
+Eftersom $G(x)=\sum\limits_{n=0}^\infty a_n x^{n} = \sum\limits_{n=0}^\infty \left( (-1)^{n+1}\frac{5}{16} + \frac{5}{16}3^{n} - \frac{n 3^{n}}{12} \right)x^{n}$ måste
+\[
+a_n = (-1)^{n+1}\frac{5}{16} + \frac{5}{16}3^{n} - \frac{n 3^{n}}{12}
+.\] 
+
+Den andra rekursionen skickas som bild då jag inte har tid att skriva om den i \LaTeX.
+
+\end{document}
+
